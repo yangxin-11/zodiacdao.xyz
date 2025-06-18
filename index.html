@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中西合璧·专业运势分析</title>
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Noto Serif SC & Noto Sans SC -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- Mermaid.js -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Noto Sans SC', 'Noto Serif SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+      transition: background 0.3s, color 0.3s;
+    }
+    .dark body {
+      background: #18181b;
+      color: #f3f4f6;
+    }
+    .font-serif {
+      font-family: 'Noto Serif SC', serif;
+    }
+    .font-sans {
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+    /* 微交互动画 */
+    .transition-base {
+      transition: all 0.2s cubic-bezier(.4,0,.2,1);
+    }
+    .card-hover:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 8px 32px 0 rgba(60,60,120,0.12);
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+    /* Mermaid dark mode fix */
+    .dark .mermaid svg {
+      background: #18181b !important;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
+  <!-- 深浅色模式切换按钮 -->
+  <div class="fixed top-4 right-4 z-50">
+    <button id="themeToggle" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full p-2 shadow transition-base" aria-label="切换深浅色模式">
+      <i id="themeIcon" class="fas fa-moon text-indigo-600 dark:text-yellow-400"></i>
+    </button>
+  </div>
+
+  <!-- Header -->
+  <header class="w-full bg-white/80 dark:bg-gray-900/80 shadow-lg backdrop-blur sticky top-0 z-40 transition-base">
+    <div class="max-w-7xl mx-auto flex justify-between items-center py-4 px-6">
+      <div class="text-2xl md:text-3xl font-extrabold font-serif text-indigo-700 dark:text-indigo-300 tracking-tight flex items-center gap-2">
+        <i class="fa-solid fa-mountain-sun"></i>
+        中西合璧运势
+      </div>
+      <nav class="space-x-6 hidden md:block text-lg font-medium">
+        <a href="#features" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-base">特色</a>
+        <a href="#how" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-base">如何运作</a>
+        <a href="#pricing" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-base">价格</a>
+        <a href="#faq" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-base">常见问题</a>
+        <a href="#testimonials" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-base">用户评价</a>
+      </nav>
+      <a href="#form" class="ml-4 bg-indigo-600 dark:bg-indigo-500 text-white px-5 py-2 rounded-lg shadow hover:bg-indigo-700 dark:hover:bg-indigo-400 transition-base font-bold">立即体验</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden" id="hero">
+    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-indigo-200/60 via-white/80 to-indigo-100/60 dark:from-indigo-900/80 dark:via-gray-900/80 dark:to-indigo-800/80 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-6 py-24 flex flex-col md:flex-row items-center relative z-10">
+      <div class="md:w-1/2 mb-12 md:mb-0 fade-in">
+        <h1 class="text-5xl md:text-6xl font-extrabold font-serif mb-6 leading-tight text-gray-900 dark:text-white drop-shadow-lg">融合东方玄学与西方星象</h1>
+        <p class="text-xl md:text-2xl font-sans mb-8 text-gray-700 dark:text-gray-200">结合紫微斗数、易经、星座学等中西方玄学理论，科学严谨地为您解析人生运势，助您把握机遇，趋吉避凶。</p>
+        <div class="mb-8">
+          <span class="inline-block bg-indigo-100 dark:bg-indigo-800 text-indigo-700 dark:text-indigo-200 px-4 py-2 rounded-full font-medium text-base shadow"><i class="fa-solid fa-star mr-2"></i>专业 · 权威 · 科学</span>
+        </div>
+        <a href="#form" class="inline-block bg-gradient-to-r from-indigo-600 to-purple-500 hover:from-indigo-700 hover:to-purple-600 text-white px-8 py-3 rounded-xl shadow-lg font-bold text-lg transition-base">立即测试 <i class="fa-solid fa-arrow-right ml-2"></i></a>
+      </div>
+      <div class="md:w-1/2 flex justify-center fade-in">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="运势分析" class="rounded-3xl shadow-2xl w-full max-w-md border-4 border-indigo-100 dark:border-indigo-900">
+      </div>
+    </div>
+  </section>
+
+  <!-- 运势表单 -->
+  <section class="py-20 bg-white dark:bg-gray-900" id="form">
+    <div class="max-w-xl mx-auto px-6">
+      <div class="bg-gradient-to-br from-indigo-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-3xl shadow-2xl p-10 card-hover transition-base">
+        <h2 class="text-3xl font-bold font-serif mb-8 text-center text-indigo-700 dark:text-indigo-300 flex items-center justify-center gap-2"><i class="fa-solid fa-wand-magic-sparkles"></i>输入信息，获取专属运势</h2>
+        <form id="fortuneForm" class="space-y-8">
+          <div>
+            <label class="block mb-2 text-gray-700 dark:text-gray-200 font-medium">姓名</label>
+            <input type="text" id="name" required class="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:bg-gray-800 dark:text-gray-100 transition-base" placeholder="请输入您的姓名">
+          </div>
+          <div>
+            <label class="block mb-2 text-gray-700 dark:text-gray-200 font-medium">生日</label>
+            <input type="date" id="birthday" required class="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:bg-gray-800 dark:text-gray-100 transition-base">
+          </div>
+          <button type="submit" class="w-full bg-gradient-to-r from-indigo-600 to-purple-500 hover:from-indigo-700 hover:to-purple-600 text-white py-3 rounded-lg font-bold text-lg shadow-lg transition-base flex items-center justify-center gap-2"><i class="fa-solid fa-chart-line"></i>开始分析</button>
+        </form>
+        <div id="fortuneResult" class="mt-10 hidden">
+          <!-- 运势结果将在这里显示 -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-24 bg-gradient-to-br from-white to-indigo-50 dark:from-gray-900 dark:to-indigo-800" id="features">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl font-bold font-serif text-center mb-16 text-gray-900 dark:text-white flex items-center justify-center gap-2"><i class="fa-solid fa-gem"></i>我们的特色</h2>
+      <div class="grid md:grid-cols-3 gap-12">
+        <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-10 text-center card-hover transition-base fade-in">
+          <div class="text-indigo-600 dark:text-indigo-300 text-5xl mb-6"><i class="fa-solid fa-yin-yang"></i></div>
+          <h3 class="font-bold text-2xl mb-3 font-serif">中西结合</h3>
+          <p class="text-lg text-gray-700 dark:text-gray-200">融合紫微斗数、易经、星座等多元玄学体系，全面剖析您的运势。</p>
+        </div>
+        <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-10 text-center card-hover transition-base fade-in">
+          <div class="text-indigo-600 dark:text-indigo-300 text-5xl mb-6"><i class="fa-solid fa-brain"></i></div>
+          <h3 class="font-bold text-2xl mb-3 font-serif">科学算法</h3>
+          <p class="text-lg text-gray-700 dark:text-gray-200">基于大数据与专业算法，确保分析结果科学、精准、值得信赖。</p>
+        </div>
+        <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-10 text-center card-hover transition-base fade-in">
+          <div class="text-indigo-600 dark:text-indigo-300 text-5xl mb-6"><i class="fa-solid fa-user-tie"></i></div>
+          <h3 class="font-bold text-2xl mb-3 font-serif">专家团队</h3>
+          <p class="text-lg text-gray-700 dark:text-gray-200">由资深玄学大师与西方占星师联合研发，专业权威，口碑保障。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-24 bg-white dark:bg-gray-900" id="how">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl font-bold font-serif text-center mb-16 text-gray-900 dark:text-white flex items-center justify-center gap-2"><i class="fa-solid fa-compass"></i>如何运作</h2>
+      <div class="grid md:grid-cols-4 gap-10 text-center">
+        <div class="fade-in">
+          <div class="text-indigo-600 dark:text-indigo-300 text-4xl mb-4"><i class="fa-solid fa-pen-nib"></i></div>
+          <h3 class="font-bold mb-2 text-xl font-serif">填写信息</h3>
+          <p class="text-gray-700 dark:text-gray-200">输入您的姓名与出生日期。</p>
+        </div>
+        <div class="fade-in">
+          <div class="text-indigo-600 dark:text-indigo-300 text-4xl mb-4"><i class="fa-solid fa-robot"></i></div>
+          <h3 class="font-bold mb-2 text-xl font-serif">智能分析</h3>
+          <p class="text-gray-700 dark:text-gray-200">系统自动结合中西玄学理论进行深度分析。</p>
+        </div>
+        <div class="fade-in">
+          <div class="text-indigo-600 dark:text-indigo-300 text-4xl mb-4"><i class="fa-solid fa-file-lines"></i></div>
+          <h3 class="font-bold mb-2 text-xl font-serif">生成报告</h3>
+          <p class="text-gray-700 dark:text-gray-200">为您生成专属运势评级、分数、宜忌与详细理由。</p>
+        </div>
+        <div class="fade-in">
+          <div class="text-indigo-600 dark:text-indigo-300 text-4xl mb-4"><i class="fa-solid fa-user-astronaut"></i></div>
+          <h3 class="font-bold mb-2 text-xl font-serif">专业解读</h3>
+          <p class="text-gray-700 dark:text-gray-200">专家团队为您提供个性化建议，助您趋吉避凶。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="py-24 bg-gradient-to-br from-indigo-50 to-white dark:from-gray-800 dark:to-gray-900" id="pricing">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl font-bold font-serif text-center mb-16 text-gray-900 dark:text-white flex items-center justify-center gap-2"><i class="fa-solid fa-coins"></i>价格方案</h2>
+      <div class="flex flex-col md:flex-row justify-center gap-12">
+        <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-10 flex-1 text-center border-2 border-indigo-100 dark:border-indigo-800 card-hover transition-base fade-in">
+          <h3 class="font-bold text-2xl mb-4 font-serif">基础版</h3>
+          <div class="text-4xl font-bold text-indigo-600 dark:text-indigo-300 mb-2">¥19</div>
+          <ul class="mb-8 text-gray-700 dark:text-gray-200 space-y-2 text-lg">
+            <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>基础运势分析</li>
+            <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>宜忌建议</li>
+            <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>简要理由说明</li>
+          </ul>
+          <button class="bg-gradient-to-r from-indigo-600 to-purple-500 hover:from-indigo-700 hover:to-purple-600 text-white px-8 py-2 rounded-lg font-bold shadow-lg transition-base">立即购买</button>
+        </div>
+        <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-10 flex-1 text-center border-4 border-indigo-600 dark:border-indigo-400 scale-105 card-hover transition-base fade-in">
+          <h3 class="font-bold text-2xl mb-4 font-serif">专业版</h3>
+          <div class="text-4xl font-bold text-indigo-600 dark:text-indigo-300 mb-2">¥49</div>
+          <ul class="mb-8 text-gray-700 dark:text-gray-200 space-y-2 text-lg">
+            <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>深度运势分析</li>
+            <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>详细宜忌与理由</li>
+            <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>专家个性化建议</li>
+            <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>专属运势报告PDF</li>
+          </ul>
+          <button class="bg-gradient-to-r from-indigo-600 to-purple-500 hover:from-indigo-700 hover:to-purple-600 text-white px-8 py-2 rounded-lg font-bold shadow-lg transition-base">立即购买</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-24 bg-white dark:bg-gray-900" id="testimonials">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl font-bold font-serif text-center mb-16 text-gray-900 dark:text-white flex items-center justify-center gap-2"><i class="fa-solid fa-comments"></i>用户评价</h2>
+      <div class="grid md:grid-cols-3 gap-12">
+        <div class="bg-gradient-to-br from-indigo-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-xl p-10 card-hover transition-base fade-in">
+          <div class="mb-4 text-3xl text-indigo-600 dark:text-indigo-300"><i class="fa-solid fa-quote-left"></i></div>
+          <p class="mb-4 text-lg text-gray-700 dark:text-gray-200">分析结果非常专业，结合了东西方玄学，感觉很有道理！推荐！</p>
+          <div class="font-bold text-indigo-700 dark:text-indigo-300">李女士 · 上海</div>
+        </div>
+        <div class="bg-gradient-to-br from-indigo-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-xl p-10 card-hover transition-base fade-in">
+          <div class="mb-4 text-3xl text-indigo-600 dark:text-indigo-300"><i class="fa-solid fa-quote-left"></i></div>
+          <p class="mb-4 text-lg text-gray-700 dark:text-gray-200">报告内容详实，宜忌建议很实用，值得付费体验！</p>
+          <div class="font-bold text-indigo-700 dark:text-indigo-300">王先生 · 北京</div>
+        </div>
+        <div class="bg-gradient-to-br from-indigo-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-xl p-10 card-hover transition-base fade-in">
+          <div class="mb-4 text-3xl text-indigo-600 dark:text-indigo-300"><i class="fa-solid fa-quote-left"></i></div>
+          <p class="mb-4 text-lg text-gray-700 dark:text-gray-200">界面高级，分析科学，服务贴心，五星好评！</p>
+          <div class="font-bold text-indigo-700 dark:text-indigo-300">赵小姐 · 深圳</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24 bg-gradient-to-br from-indigo-50 to-white dark:from-gray-900 dark:to-gray-800" id="faq">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-4xl font-bold font-serif text-center mb-16 text-gray-900 dark:text-white flex items-center justify-center gap-2"><i class="fa-solid fa-circle-question"></i>常见问题</h2>
+      <div class="space-y-10">
+        <div class="fade-in">
+          <h3 class="font-bold mb-2 text-xl font-serif text-indigo-700 dark:text-indigo-300">Q: 运势分析的依据是什么？</h3>
+          <p class="text-gray-700 dark:text-gray-200">A: 我们结合紫微斗数、易经、星座学等中西方玄学理论，融合大数据与专业算法，确保分析结果科学、权威、可信赖。</p>
+        </div>
+        <div class="fade-in">
+          <h3 class="font-bold mb-2 text-xl font-serif text-indigo-700 dark:text-indigo-300">Q: 我的个人信息安全吗？</h3>
+          <p class="text-gray-700 dark:text-gray-200">A: 您的信息仅用于运势分析，绝不泄露给第三方，严格保护您的隐私安全。</p>
+        </div>
+        <div class="fade-in">
+          <h3 class="font-bold mb-2 text-xl font-serif text-indigo-700 dark:text-indigo-300">Q: 付费后能获得什么？</h3>
+          <p class="text-gray-700 dark:text-gray-200">A: 付费用户可获得更详细的运势报告、个性化建议及专属PDF文档。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer & 延伸阅读 -->
+  <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 pt-16 pb-8 mt-12">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+      <div class="mb-8 md:mb-0">
+        <div class="text-gray-500 dark:text-gray-400">© 2024 中西合璧运势. 保留所有权利.</div>
+        <div class="space-x-4 mt-4">
+          <a href="#" class="text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-300 transition-base">隐私政策</a>
+          <a href="#" class="text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-300 transition-base">服务条款</a>
+        </div>
+      </div>
+      <div class="max-w-xl w-full">
+        <h3 class="font-bold text-lg mb-4 text-indigo-700 dark:text-indigo-300 flex items-center gap-2"><i class="fa-solid fa-book-open"></i>延伸阅读</h3>
+        <ul class="space-y-2 text-gray-700 dark:text-gray-200 text-base">
+          <li><a href="https://book.douban.com/subject/26986954/" target="_blank" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-base font-medium">《易经的智慧》——南怀瑾</a> <span class="text-gray-400">（深入浅出解读易经哲理，适合初学者）</span></li>
+          <li><a href="https://book.douban.com/subject/10554308/" target="_blank" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-base font-medium">《紫微斗数全书》——李涵辰</a> <span class="text-gray-400">（紫微斗数权威著作，系统讲解命理分析）</span></li>
+          <li><a href="https://book.douban.com/subject/26986954/" target="_blank" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-base font-medium">《星座与人生》——苏珊·米勒</a> <span class="text-gray-400">（西方星座学经典，实用性强）</span></li>
+          <li><a href="https://book.douban.com/subject/25862578/" target="_blank" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-base font-medium">《命理探微》——邵伟华</a> <span class="text-gray-400">（命理学入门与进阶，理论与实践结合）</span></li>
+          <li><a href="https://book.douban.com/subject/26829016/" target="_blank" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-base font-medium">《中国玄学史》——牟钟鉴</a> <span class="text-gray-400">（系统梳理中国玄学发展脉络）</span></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 运势计算脚本 & Mermaid可视化 -->
+  <script>
+    // 深浅色模式切换
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    function setTheme(mode) {
+      if (mode === 'dark') {
+        document.documentElement.classList.add('dark');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+      } else {
+        document.documentElement.classList.remove('dark');
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+      }
+    }
+    // 跟随系统
+    function getSystemTheme() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    let userTheme = localStorage.getItem('theme');
+    setTheme(userTheme || getSystemTheme());
+    themeToggle.onclick = function() {
+      userTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+      setTheme(userTheme);
+      localStorage.setItem('theme', userTheme);
+    };
+    // 响应系统主题变化
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+    });
+
+    // 微交互：滚动动画
+    function revealOnScroll() {
+      document.querySelectorAll('.fade-in').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 60) {
+          el.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('DOMContentLoaded', revealOnScroll);
+
+    // 运势算法与可视化
+    function getFortuneLevel(score) {
+      if (score >= 90) return '极佳';
+      if (score >= 75) return '优秀';
+      if (score >= 60) return '良好';
+      if (score >= 40) return '一般';
+      return '需谨慎';
+    }
+    function getFortuneAdvice(score) {
+      if (score >= 90) return ['宜：积极进取，抓住机遇', '忌：犹豫不决，错失良机', '理由：紫微星曜高照，星象与八字皆呈吉兆，事业财运双丰收。'];
+      if (score >= 75) return ['宜：拓展人脉，学习提升', '忌：固步自封，忽视健康', '理由：命盘与星座呈现良好互动，易得贵人相助。'];
+      if (score >= 60) return ['宜：稳中求进，理性投资', '忌：冲动消费，情绪波动', '理由：易经卦象显示平稳，需注意情绪管理。'];
+      if (score >= 40) return ['宜：调整心态，静待时机', '忌：冒进投机，轻信他人', '理由：星盘与命理略显波折，需谨慎行事。'];
+      return ['宜：低调行事，保守理财', '忌：重大决策，轻信偏方', '理由：命理与星象均示警，近期需多加防范。'];
+    }
+    document.getElementById('fortuneForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const birthday = document.getElementById('birthday').value;
+      if (!name || !birthday) return;
+      // 专业感的伪算法：根据姓名和生日生成一个分数
+      let hash = 0;
+      for (let i = 0; i < name.length; i++) hash += name.charCodeAt(i) * (i+1);
+      for (let i = 0; i < birthday.length; i++) hash += birthday.charCodeAt(i) * (i+2);
+      const score = 40 + (hash % 61); // 40-100
+      const level = getFortuneLevel(score);
+      const [yi, ji, reason] = getFortuneAdvice(score);
+      // Mermaid可视化关系图
+      const mermaidStr = `graph TD\n  A[姓名：${name}] --> B[生日：${birthday}]\n  B --> C[运势分数：${score}]\n  C --> D[评级：${level}]\n  D --> E[宜：${yi.replace('宜：','')}]\n  D --> F[忌：${ji.replace('忌：','')}]`;
+      document.getElementById('fortuneResult').innerHTML = `
+        <div class="text-center mb-8">
+          <div class="text-2xl md:text-3xl font-bold mb-2 text-indigo-700 dark:text-indigo-300 font-serif flex items-center justify-center gap-2"><i class='fa-solid fa-sparkles'></i>${name} 的今日运势</div>
+          <div class="text-lg md:text-xl mb-2">运势评级：<span class="font-bold text-indigo-600 dark:text-indigo-300">${level}</span></div>
+          <div class="text-lg md:text-xl mb-2">运势分数：<span class="font-bold text-indigo-600 dark:text-indigo-300">${score} / 100</span></div>
+          <div class="mb-2 text-green-600 dark:text-green-400 font-medium">${yi}</div>
+          <div class="mb-2 text-red-600 dark:text-red-400 font-medium">${ji}</div>
+          <div class="text-gray-700 dark:text-gray-200 mt-4">${reason}</div>
+        </div>
+        <div class="bg-white dark:bg-gray-900 rounded-xl shadow p-6 mb-4 max-w-2xl mx-auto">
+          <div class="font-bold mb-2 text-indigo-700 dark:text-indigo-300 flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i>运势关系可视化</div>
+          <div class="mermaid" id="fortuneMermaid">${mermaidStr}</div>
+        </div>
+      `;
+      document.getElementById('fortuneResult').classList.remove('hidden');
+      // Mermaid渲染
+      setTimeout(() => {
+        if(window.mermaid) mermaid.init(undefined, '#fortuneMermaid');
+      }, 100);
+    });
+  </script>
+</body>
+</html> 
